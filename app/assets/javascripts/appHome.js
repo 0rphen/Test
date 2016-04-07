@@ -24,15 +24,10 @@ var home = angular.module("RubAngProj", ['LocalStorageModule',
 	$scope.delItem = function () {
 	    $scope.toDo.shift();
 	};
-	$scope.search = function (keywords) {
-	    if (keywords) {
-		angular.forEach($scope.toDo, function(item){
-		    if (item.title.toLowerCase().indexOf(keywords) === -1)
-			console.log(item);//$scope.toDo.splice(item,1);
-		});
-	    }/* else {
-		$scope.toDo = [];
-	    }*/
+	$scope.search = function (comentario) {
+	    if ($scope.keywords == undefined)
+		return true;
+	    return comentario.title.toLowerCase().indexOf($scope.keywords.toLowerCase()) !== -1;
 	};
     }])
     .config(['$routeProvider', function ($routeProvider) {
