@@ -1,5 +1,7 @@
-angular.module("RubAngProj", ["LocalStorageModule"])
-    .controller ('toDoController', ["$scope", "$http", "localStorageService", function ($scope, $http, localStorageService) {
+var home = angular.module("RubAngProj", ['LocalStorageModule',
+					 'templates',
+					 'ngRoute'])
+    .controller ('toDoController', ["$scope","$http","localStorageService","$routeParams","$location",function ($scope,$http,localStorageService,$routeParams,$location) {
 	if (localStorageService.get ("miClave")) {
 	    $scope.toDo = localStorageService.get ("miClave");
 	} else {
@@ -22,4 +24,21 @@ angular.module("RubAngProj", ["LocalStorageModule"])
 	$scope.delItem = function () {
 	    $scope.toDo.shift();
 	};
+	$scope.search = function (keywords) {
+	    if (keywords) {
+		angular.forEach($scope.toDo, function(item){
+		    if (item.title.toLowerCase().indexOf(keywords) === -1)
+			console.log(item);//$scope.toDo.splice(item,1);
+		});
+	    }/* else {
+		$scope.toDo = [];
+	    }*/
+	};
+    }])
+    .config(['$routeProvider', function ($routeProvider) {
+	$routeProvider
+	    .when('/', {
+		templateUrl: 'index.html',
+		controller: 'toDoController'
+	    });
     }]);

@@ -1,33 +1,41 @@
 <div ng-app="RubAngProj">
-    <div class="container-fluid" ng-controller="toDoController">
+    <header class="row">
+	<h1 class="text-center col-md-6 col-md-offset-3">Post Comments</h1>
+    </header>
+    <div class="view-container container-fluid" ng-controller="toDoController">
 	<form class="panel panel-default form-horizontal" ng-submit="addAct()">
 	    <div class="panel-body">
 		<div class="form-group">
-		    <label class="col-sm-2 control-label">Ingrese Nombre</label>
+		    <label class="col-sm-2 control-label">Input Name</label>
 		    <div class="col-sm-10">
 			<input type="text" name="nombre" class="form-control" ng-model="newAct.title"/>
 		    </div>
 		</div>
 		<div class="form-group panel">
-		    <label class="col-sm-2 control-label">Ingrese Comentario</label>
+		    <label class="col-sm-2 control-label">Add Comment</label>
 		    <div class="col-sm-10" >
 			<textarea rows="3" name="cuerpo" class="form-control" ng-model="newAct.body"></textarea>
 		    </div>
 		</div>
 		<div class="form-group">
-		    <div class="col-sm-offset-8 col-sm-4">
-			<input type="button" ng-click="delItem()" value="Eliminar primero" class="btn btn-primary"/>
-			<input type="submit" name="add" class="btn btn-primary" value="agregar Comentario"/>
+		    <div class="col-sm-offset-9 col-sm-3">
+			<input type="button" ng-click="delItem()" value="Delete First" class="btn btn-primary"/>
+			<input type="submit" name="add" class="btn btn-primary" value="add Comment"/>
 		    </div>
 		</div>
 	    </div>
 	</form>
-	<div ng-repeat="comentario in toDo" class="panel panel-default">
-	    <div class="panel-heading">
-		<h3>{{comentario.title}}</h3>
-	    </div>
-	    <div class="panel-body">
-		<p>{{comentario.body}}</p>
+	<div ng-view class="view-frame animate-view panel panel-default">
+	    
+	</div>
+	<div ng-if="toDo">
+	    <div ng-repeat="comentario in toDo" class="panel panel-default">
+		<div class="panel-heading">
+		    <h3>{{comentario.title}}</h3>
+		</div>
+		<div class="panel-body">
+		    <p>{{comentario.body}}</p>
+		</div>
 	    </div>
 	</div>
     </div>
